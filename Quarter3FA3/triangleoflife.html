@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AA - Randomizer</title>
+    <style>
+        body {
+            background-image: url('Images/background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* Full height */
+            display: flex; /* Use flexbox */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            margin: 0; /* Remove default margin */
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: center; /* Center text */
+        }
+        .box {
+            display: inline-block;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Journey of Numbers</h1>
+        <p>In a world where numbers rule, three special numbers have been chosen...</p>
+        <div id="random-values"></div>
+        <p>The biggest number among them is: <strong id="biggest"></strong></p>
+        <p>The <strong id="nth-letter"></strong>th letter of the alphabet represents a mysterious code.</p>
+        <p>Our hero had to complete a task in <strong id="total-mins"></strong> minutes, which translates to <strong id="hr-min"></strong>.</p>
+    </div>
+
+    <script>
+        function getRandomNumber() {
+            return Math.ceil(Math.random() * 20);
+        }
+
+        let num1 = getRandomNumber();
+        let num2 = getRandomNumber();
+        let num3 = getRandomNumber();
+        
+        let biggest = Math.max(num1, num2, num3);
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let nthLetter = num1 <= 26 ? alphabet[num1 - 1] : "?";
+        let totalMinutes = num2 * num3;
+        let hours = Math.floor(totalMinutes / 60);
+        let minutes = totalMinutes % 60;
+        let hrMinFormat = `${hours} hr ${minutes} min`;
+        
+        document.getElementById("random-values").innerHTML = `
+            <div class='box'>Num1: ${num1}</div>
+            <div class='box'>Num2: ${num2}</div>
+            <div class='box'>Num3: ${num3}</div>
+        `;
+        document.getElementById("biggest").innerText = biggest;
+        document.getElementById("nth-letter").innerText = nthLetter;
+        document.getElementById("total-mins").innerText = totalMinutes + " mins";
+        document.getElementById("hr-min").innerText = hrMinFormat;
+    </script>
+</body>
+</html>
